@@ -27,7 +27,12 @@ class Video(Resource):
         return {"rowsAffected": rows}, 200
 
     def patch(self, id):
-        return {"data": id}, 200
+        video = self.video_put_args.parse_args()
+        logic = VideoLogic()
+        rows = logic.updateVideo(id, video)
+        return {"rowsAffected": rows}, 200
 
     def delete(self, id):
-        return {"data": id}, 200
+        logic = VideoLogic()
+        rows = logic.deleteVideo(id)
+        return {"rowsAffected": rows}, 200
